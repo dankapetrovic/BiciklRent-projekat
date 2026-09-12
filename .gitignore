@@ -1,0 +1,15 @@
+# IDE
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Osetljivi podaci
+backend/src/main/resources/application.properties
+
+# Arhive
+*.zip
+
+# OS
+.DS_Store
+Thumbs.db
