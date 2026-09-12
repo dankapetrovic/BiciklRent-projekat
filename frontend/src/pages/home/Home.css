@@ -1,0 +1,623 @@
+/* ---------- Modal shell ---------- */
+
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(61, 44, 78, 0.45);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.modal-backdrop.payment-backdrop {
+    z-index: 60;
+}
+
+/* ---------- bicikl detail modal ---------- */
+
+.bicikl-modal {
+    width: min(96vw, 920px);
+    max-height: 92vh;
+    overflow-y: auto;
+    position: relative;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    border-radius: var(--radius);
+    background: var(--surface-solid);
+    box-shadow: var(--shadow-lg);
+}
+
+.bicikl-modal-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    z-index: 2;
+    width: 38px;
+    height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.94);
+    color: var(--ink);
+    font-size: 18px;
+    font-weight: 900;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.bicikl-modal-close:hover {
+    background: #ffffff;
+    transform: scale(1.1) rotate(90deg);
+}
+
+.bicikl-modal-art {
+    position: relative;
+    height: 220px;
+    overflow: hidden;
+}
+
+.bicikl-modal-art img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.bicikl-modal-art .bicikl-card-category,
+.bicikl-modal-art .bicikl-card-badge {
+    max-width: none;
+}
+
+.bicikl-modal-body {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 28px;
+    padding: 26px 28px 30px;
+}
+
+.bicikl-modal-info h2 {
+    margin: 0 0 4px;
+    color: var(--ink);
+    font-size: 24px;
+    font-weight: 800;
+}
+
+.bicikl-modal-info .manufacturer {
+    margin: 0 0 12px;
+    color: var(--pink);
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.bicikl-modal-info p.description {
+    margin: 0 0 16px;
+    color: var(--muted);
+    font-size: 14.5px;
+    font-weight: 600;
+    line-height: 1.55;
+}
+
+.bicikl-modal-specs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    padding: 14px;
+    border-radius: var(--radius-sm);
+    background: rgba(168, 179, 255, 0.12);
+}
+
+.bicikl-modal-specs div {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.bicikl-modal-specs span {
+    color: var(--purple-dark);
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.bicikl-modal-specs strong {
+    color: var(--ink);
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.bicikl-modal-booking h3 {
+    margin: 0 0 10px;
+    color: var(--ink);
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.calendar-hint {
+    margin: 10px 0 0;
+    color: var(--muted);
+    font-size: 12.5px;
+    font-weight: 650;
+    line-height: 1.5;
+}
+
+.calendar-hint.guest {
+    padding: 10px 12px;
+    border-radius: var(--radius-sm);
+    background: rgba(127, 224, 196, 0.16);
+}
+
+.book-button {
+    width: 100%;
+    min-height: 48px;
+    margin-top: 14px;
+    border: none;
+    border-radius: 999px;
+    background: linear-gradient(135deg, var(--purple), var(--pink));
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 800;
+    box-shadow: 0 4px 0 rgba(255, 143, 177, 0.4);
+    transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.18s ease, filter 0.18s ease;
+}
+
+.book-button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    filter: saturate(1.1);
+}
+
+.book-button:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: 0 1px 0 rgba(255, 143, 177, 0.4);
+}
+
+.book-button:disabled {
+    cursor: not-allowed;
+    background: linear-gradient(135deg, #cbd5e1, #94a3b8);
+    box-shadow: none;
+}
+
+/* ---------- Occupancy calendar ---------- */
+
+.occupancy-calendar {
+    padding: 14px;
+    border: 2px solid var(--line);
+    border-radius: var(--radius-sm);
+    background: #ffffff;
+}
+
+.occupancy-calendar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    color: var(--ink);
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.occupancy-calendar-header button {
+    width: 30px;
+    height: 30px;
+    border: none;
+    border-radius: 999px;
+    background: rgba(168, 179, 255, 0.16);
+    color: var(--purple-dark);
+    font-size: 16px;
+    font-weight: 900;
+    line-height: 1;
+    transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.occupancy-calendar-header button:hover {
+    background: rgba(168, 179, 255, 0.3);
+    transform: scale(1.08);
+}
+
+.occupancy-calendar-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    margin-bottom: 4px;
+}
+
+.occupancy-calendar-weekdays span {
+    text-align: center;
+    color: var(--muted);
+    font-size: 10.5px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.occupancy-calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+}
+
+.cal-day {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 10px;
+    background: transparent;
+    color: var(--ink);
+    font-size: 12.5px;
+    font-weight: 700;
+    transition: transform 0.12s ease;
+}
+
+.cal-day:disabled:not(.cal-readonly) {
+    visibility: hidden;
+}
+
+.cal-day-free {
+    background: rgba(127, 224, 196, 0.24);
+    color: #1f8a6c;
+}
+
+.cal-day-free:not(.cal-readonly):hover {
+    background: rgba(127, 224, 196, 0.45);
+    cursor: pointer;
+    transform: scale(1.08);
+}
+
+.cal-day-occupied {
+    background: rgba(255, 107, 107, 0.16);
+    color: #c0392b;
+    cursor: not-allowed;
+}
+
+.cal-day-past {
+    background: transparent;
+    color: var(--muted);
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.cal-day-today {
+    box-shadow: inset 0 0 0 2px var(--purple);
+}
+
+.cal-day-selected-start,
+.cal-day-selected-end {
+    background: linear-gradient(135deg, var(--purple), var(--pink)) !important;
+    color: #ffffff !important;
+}
+
+.cal-day-in-range {
+    background: rgba(168, 179, 255, 0.3) !important;
+    color: var(--purple-dark) !important;
+}
+
+.occupancy-calendar-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 12px;
+    color: var(--muted);
+    font-size: 11.5px;
+    font-weight: 700;
+}
+
+.occupancy-calendar-legend span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.legend-free {
+    background: var(--cyan);
+}
+
+.legend-occupied {
+    background: var(--red);
+}
+
+.legend-selected {
+    background: linear-gradient(135deg, var(--purple), var(--pink));
+}
+
+/* ---------- Search bar ---------- */
+
+.search-bar {
+    margin-bottom: 22px;
+}
+
+.search-input {
+    width: 100%;
+    min-height: 50px;
+    padding: 12px 20px;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    border-radius: 999px;
+    background: var(--surface);
+    backdrop-filter: blur(14px);
+    color: var(--ink);
+    font-size: 14.5px;
+    font-weight: 650;
+    box-shadow: var(--shadow-sm);
+    transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--purple);
+    box-shadow: 0 0 0 4px rgba(168, 179, 255, 0.24);
+}
+
+/* ---------- Sort bar ---------- */
+
+.sort-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px;
+}
+
+.sort-bar .search-input {
+    flex: 1;
+    min-width: 220px;
+}
+
+.sort-select-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.sort-select-wrap label {
+    color: var(--purple-dark);
+    font-size: 12px;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.sort-select {
+    min-height: 44px;
+    padding: 8px 16px;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    border-radius: 999px;
+    background: var(--surface);
+    backdrop-filter: blur(10px);
+    color: var(--ink);
+    font-size: 13px;
+    font-weight: 650;
+    box-shadow: var(--shadow-sm);
+    transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.sort-select:focus {
+    outline: none;
+    border-color: var(--purple);
+    box-shadow: 0 0 0 4px rgba(168, 179, 255, 0.2);
+}
+
+@media (max-width: 620px) {
+    .sort-bar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .sort-select-wrap {
+        justify-content: space-between;
+    }
+
+    .sort-select {
+        flex: 1;
+    }
+}
+
+/* ---------- Payment modal ---------- */
+
+.payment-modal {
+    width: min(94vw, 440px);
+    max-width: 100%;
+    padding: 30px 28px;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    border-radius: var(--radius);
+    background: var(--surface-solid);
+    box-shadow: var(--shadow-lg);
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+.payment-modal form {
+    width: 100%;
+}
+
+.payment-modal h2 {
+    margin: 0 0 4px;
+    color: var(--ink);
+    font-size: 22px;
+    font-weight: 800;
+}
+
+.payment-summary {
+    margin: 0 0 20px;
+    padding: 12px 14px;
+    border-radius: var(--radius-sm);
+    background: rgba(168, 179, 255, 0.12);
+    color: var(--text);
+    font-size: 13.5px;
+    font-weight: 650;
+    line-height: 1.6;
+}
+
+.payment-summary strong {
+    color: var(--purple-dark);
+}
+
+.payment-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 12px;
+    width: 100%;
+}
+
+.payment-success {
+    padding: 16px;
+    border-radius: var(--radius-sm);
+    background: linear-gradient(135deg, #d7f7ea, #f0fffa);
+    color: #1f8a6c;
+    font-size: 14px;
+    font-weight: 800;
+    text-align: center;
+}
+
+/* ---------- Moja iznajmljivanja ---------- */
+
+.rental-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 22px;
+}
+
+.rental-card {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    border-radius: var(--radius);
+    background: var(--surface-solid);
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
+}
+
+.rental-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+}
+
+.rental-card-art {
+    height: 130px;
+}
+
+.rental-card-art img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.rental-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 18px 20px 20px;
+}
+
+.rental-card-body h2 {
+    margin: 0;
+    color: var(--ink);
+    font-size: 17px;
+    font-weight: 800;
+}
+
+.rental-period {
+    display: inline-flex;
+    align-self: flex-start;
+    padding: 5px 14px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, rgba(168, 179, 255, 0.2), rgba(255, 143, 177, 0.2));
+    color: var(--purple-dark);
+    font-size: 12.5px;
+    font-weight: 800;
+}
+
+/* ---------- Recenzije link dugme ---------- */
+
+.reviews-link-button {
+    width: 100%;
+    min-height: 44px;
+    margin-top: 14px;
+    padding: 10px 16px;
+    border: 2px solid rgba(168, 179, 255, 0.35);
+    border-radius: 999px;
+    background: rgba(168, 179, 255, 0.1);
+    color: var(--purple-dark);
+    font-size: 14px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1),
+    background 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.reviews-link-button:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(
+            135deg,
+            rgba(168, 179, 255, 0.22),
+            rgba(255, 143, 177, 0.22)
+    );
+    box-shadow: var(--shadow-sm);
+}
+
+.reviews-link-button:active {
+    transform: translateY(0);
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 760px) {
+    .bicikl-modal-body {
+        grid-template-columns: 1fr;
+        padding: 20px 20px 24px;
+    }
+
+    .bicikl-modal-art {
+        height: 180px;
+    }
+
+    .payment-row {
+        grid-template-columns: 1fr;
+    }
+
+    .rental-grid {
+        gap: 16px;
+    }
+}
+
+@media (max-width: 520px) {
+    .modal-backdrop {
+        padding: 12px;
+        align-items: flex-start;
+    }
+
+    .bicikl-modal {
+        width: 100%;
+        max-height: 94vh;
+        margin-top: 10px;
+    }
+
+    .payment-modal,
+    .verification-modal {
+        width: 100%;
+        padding: 24px 18px;
+    }
+
+    .occupancy-calendar {
+        padding: 10px;
+    }
+
+    .cal-day {
+        font-size: 11.5px;
+    }
+
+    .bicikl-card-art {
+        height: 150px;
+    }
+}

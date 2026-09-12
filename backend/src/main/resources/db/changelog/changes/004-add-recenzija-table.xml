@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-5.0.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+
+    <changeSet id="004-1-create-recenzija-table" author="Danka">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="recenzija"/>
+            </not>
+        </preConditions>
+        <createTable tableName="recenzija">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_recenzija"/>
+            </column>
+            <column name="ocena" type="INT"/>
+            <column name="komentar" type="VARCHAR(1000)"/>
+            <column name="datum_kreiranja" type="DATE"/>
+            <column name="bicikl_id" type="BIGINT"/>
+            <column name="klijent_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="004-2-fk-recenzija-bicikl" author="Danka">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <foreignKeyConstraintExists foreignKeyName="FK_RECENZIJA_ON_BICIKL"/>
+            </not>
+        </preConditions>
+        <addForeignKeyConstraint baseColumnNames="bicikl_id" baseTableName="recenzija"
+                                 constraintName="FK_RECENZIJA_ON_BICIKL" referencedColumnNames="id"
+                                 referencedTableName="bicikl"/>
+    </changeSet>
+
+    <changeSet id="004-3-fk-recenzija-klijent" author="Danka">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <foreignKeyConstraintExists foreignKeyName="FK_RECENZIJA_ON_KLIJENT"/>
+            </not>
+        </preConditions>
+        <addForeignKeyConstraint baseColumnNames="klijent_id" baseTableName="recenzija"
+                                 constraintName="FK_RECENZIJA_ON_KLIJENT" referencedColumnNames="id"
+                                 referencedTableName="klijent"/>
+    </changeSet>
+
+    <changeSet id="004-5-seed-recenzije-v2" author="Danka">
+        <sql splitStatements="true" stripComments="true">
+            INSERT INTO recenzija (ocena, komentar, datum_kreiranja, bicikl_id, klijent_id) VALUES
+                                                                                                (5, 'Odlican bicikl, vozio sam ga na vikend izletu i sve je bilo savrseno.', '2026-07-06', 1, 1),
+                                                                                                (4, 'Udoban i lagan za voznju kroz grad, samo bih voleo mekse sedlo.', '2026-06-27', 2, 2),
+                                                                                                (5, 'Bas ono sto mi je trebalo za poslovno putovanje, brz i pouzdan.', '2026-07-07', 3, 3),
+                                                                                                (3, 'Solidan bicikl ali kocnice su mogle biti bolje podesene.', '2026-07-13', 4, 4),
+                                                                                                (5, 'Savrsen za kratke izlete, lako se manevrise.', '2026-05-04', 5, 5),
+                                                                                                (4, 'Grupna voznja je prosla odlicno, bicikl je izdrzao ceo dan bez problema.', '2026-07-21', 7, 6),
+                                                                                                (5, 'Porodicno putovanje nam je bilo mnogo lakse sa ovim biciklom, deca su presrecna.', '2026-06-06', 8, 7),
+                                                                                                (2, 'Ocekivao sam bolje stanje bicikla, imao je sitne kvarove.', '2026-07-07', 9, 8),
+                                                                                                (5, 'Koristili smo ga na letnjem festivalu, top iskustvo.', '2026-08-06', 1, 9),
+                                                                                                (4, 'Jednodnevna voznja, sve pohvale za brzo iznajmljivanje.', '2026-07-04', 5, 10);
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>

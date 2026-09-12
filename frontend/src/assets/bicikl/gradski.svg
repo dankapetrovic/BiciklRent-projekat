@@ -1,0 +1,58 @@
+<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+	<defs>
+		<linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1">
+			<stop offset="0" stop-color="#7c3aed"/>
+			<stop offset="1" stop-color="#4f46e5"/>
+		</linearGradient>
+		<linearGradient id="metalGrad" x1="0" y1="0" x2="1" y2="1">
+			<stop offset="0" stop-color="#e0e7ff"/>
+			<stop offset="1" stop-color="#94a3b8"/>
+		</linearGradient>
+	</defs>
+
+	<!-- Pozadina -->
+	<rect width="400" height="300" fill="url(#bgGrad)"/>
+
+	<!-- Dekorativni krugovi u pozadini -->
+	<g opacity="0.12">
+		<circle cx="70" cy="240" r="90" fill="#ffffff"/>
+		<circle cx="360" cy="40" r="70" fill="#ffffff"/>
+	</g>
+
+	<!-- Bela pozadinska kartica (ikona okvir) -->
+	<rect x="70" y="65" width="260" height="170" rx="24" fill="#ffffff" opacity="0.15"/>
+
+	<!-- GEOMETRIJA BICIKLE -->
+	<g transform="translate(0, 5)">
+		<!-- Zadnji točak -->
+		<circle cx="130" cy="170" r="42" fill="none" stroke="#f8fafc" stroke-width="8"/>
+		<circle cx="130" cy="170" r="35" fill="none" stroke="#1e1b4b" stroke-width="2" stroke-dasharray="4 4"/>
+		<circle cx="130" cy="170" r="6" fill="#f8fafc"/>
+
+		<!-- Prednji točak -->
+		<circle cx="270" cy="170" r="42" fill="none" stroke="#f8fafc" stroke-width="8"/>
+		<circle cx="270" cy="170" r="35" fill="none" stroke="#1e1b4b" stroke-width="2" stroke-dasharray="4 4"/>
+		<circle cx="270" cy="170" r="6" fill="#f8fafc"/>
+
+		<!-- Ram bicikle -->
+		<!-- Donja cev (pogonski deo do zadnje osovine) -->
+		<polyline points="130,170 180,170 220,110" fill="none" stroke="#f8fafc" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+		<!-- Cev sedišta -->
+		<polyline points="180,170 200,100" fill="none" stroke="#f8fafc" stroke-width="8" stroke-linecap="round"/>
+		<!-- Gornja cev -->
+		<polyline points="195,105 255,115" fill="none" stroke="#f8fafc" stroke-width="8" stroke-linecap="round"/>
+		<!-- Prednja vila -->
+		<polyline points="270,170 220,110" fill="none" stroke="#f8fafc" stroke-width="8" stroke-linecap="round"/>
+
+		<!-- Lančanik / Srednja glava -->
+		<circle cx="180" cy="170" r="12" fill="#1e1b4b" stroke="#f8fafc" stroke-width="4"/>
+
+		<!-- Sedište -->
+		<path d="M 185,92 Q 200,88 215,92 Q 205,97 185,92 Z" fill="#f59e0b" stroke="#1e1b4b" stroke-width="2"/>
+		<rect x="195" y="94" width="10" height="12" rx="2" fill="#f8fafc"/>
+
+		<!-- Korman i lula -->
+		<path d="M 220,110 L 230,95 L 242,93" fill="none" stroke="#f8fafc" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+		<circle cx="243" cy="93" r="5" fill="#f59e0b"/>
+	</g>
+</svg>

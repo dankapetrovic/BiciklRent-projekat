@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="001-seed-initial-data" author="danka">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="kategorija"/>
+            <tableExists tableName="proizvodjac"/>
+            <tableExists tableName="bicikl"/>
+            <tableExists tableName="klijent"/>
+            <tableExists tableName="zaposleni"/>
+            <tableExists tableName="iznajmljivanje"/>
+        </preConditions>
+        <sql splitStatements="true" stripComments="true">
+            INSERT IGNORE INTO kategorija (id, naziv) VALUES
+    (1, 'Drumski'),
+    (2, 'Planinski'),
+    (3, 'Gradski'),
+    (4, 'Elektricni'),
+    (5, 'Deciji'),
+    (6, 'gravel');
+
+            INSERT IGNORE INTO proizvodjac (id, name) VALUES
+                (1, 'Trek'),
+                (2, 'Giant'),
+                (3, 'Capri'),
+                (4, 'Explorer'),
+                (5, 'Global'),
+                (6, 'Nova'),
+                (7, 'SuperB'),
+                (8, 'ProBicycle'),
+                (9, 'Kids'),
+                (10, 'Sigma');
+
+            INSERT IGNORE INTO bicikl (id, datum_kupovine, napomena, dostupan, proizvodjac_id, kategorija_id, tip_bicikle, velicina_rama, broj_brzina, tip_kocnica, precnik_tocka, tezina, opis) VALUES
+                (1, '2022-05-10', 'Redovno servisiran', true, 1, 2, 'A', 'M', '21', 'Disk kocnice', '29"', '13.5kg', 'Planinski bicikl idealan za pocetnike i entuzijaste.'),
+                (2, '2021-11-03', 'Odlicno stanje', true, 2, 1, 'A', 'L', '22', 'Disk kocnice', '28"', '8.2kg', 'Profesionalni drumski bicikl sa odlicnim performansama.'),
+                (3, '2023-01-15', 'Odlicno stanje', true, 3, 3, 'BB', 'M', '7', 'Rim kocnice', '28"', '12kg', 'Kompaktan gradski bicikl za svakodnevnu voznju.'),
+                (4, '2020-08-22', 'Ima sitne ogrebotine', true, 4, 6, 'B', 'L', '24', 'Disk kocnice', '28"', '14kg', 'Svestran bicikl za asfalt i makadam.'),
+                (5, '2023-06-30', 'Novo, malo koriscen', true, 5, 4, 'C', 'M', '9', 'Disk kocnice', '27.5"', '22kg', 'Odlican izbor za duze relacije.'),
+                (6, '2019-03-12', 'Stariji model, trenutno van upotrebe', false, 6, 3, 'D', 'S', '7', 'Rim kocnice', '26"', '11.5kg', 'Kompaktan gradski bicikl.'),
+                (7, '2022-09-01', 'Profesionalni model', true, 7, 1, 'D', 'L', '18', 'Rim kocnice', '28"', '9kg', 'Legendarni kvalitet izrade.'),
+                (8, '2023-02-18', 'Odlicno stanje', true, 8, 2, 'A', 'M', '21', 'Disk kocnice', '29"', '13kg', 'Bicikl za ekstremne terene.'),
+                (9, '2021-07-07', 'Klasican dizajn', true, 9, 6, 'B', 'L', '24', 'Disk kocnice', '28"', '13.8kg', 'Robustan bicikl otporan na vremenske uslove.'),
+                (10, '2020-12-25', 'Zahteva ciscenje, trenutno van upotrebe', false, 10, 5, 'B', 'XS', '1', 'Rim kocnice', '20"', '9kg', 'Bicikl prilagodjen za decu, izuzetno lagan.');
+
+            INSERT IGNORE INTO klijent (id, ime, prezime, starost, username, password, email) VALUES
+                (1, 'Marko', 'Markovic', 25, 'marko', 'marko123', 'marko@example.com'),
+                (2, 'Jovana', 'Jovanovic', 30, 'jovana', 'jovana123', 'jovana@example.com'),
+                (3, 'Petar', 'Petrovic', 22, 'petar', 'petar123', 'petar@example.com'),
+                (4, 'Ana', 'Anic', 28, 'ana', 'ana123', 'ana@example.com'),
+                (5, 'Nikola', 'Nikolic', 35, 'nikola', 'nikola123', 'nikola@example.com'),
+                (6, 'Milica', 'Milic', 27, 'milica', 'milica123', 'milica@example.com'),
+                (7, 'Stefan', 'Stefanovic', 31, 'stefan', 'stefan123', 'stefan@example.com'),
+                (8, 'Ivana', 'Ivic', 24, 'ivana', 'ivana123', 'ivana@example.com'),
+                (9, 'Luka', 'Lukic', 29, 'luka', 'luka123', 'luka@example.com'),
+                (10, 'Test', 'Klijent', 26, 'klijent', 'klijent123', 'klijent@example.com');
+
+            INSERT IGNORE INTO zaposleni (id, ime, prezime, username, password, email) VALUES
+                (1, 'Jelena', 'Jelic', 'jelenaz', 'jelena123', 'jelenaz@biciklrent.com'),
+                (2, 'Nemanja', 'Simic', 'nemanja', 'nemanja123', 'nemanja@biciklrent.com'),
+                (3, 'Tamara', 'Tasic', 'tamara', 'tamara123', 'tamara@biciklrent.com'),
+                (4, 'Vladimir', 'Vukovic', 'vladimir', 'vladimir123', 'vladimir@biciklrent.com'),
+                (5, 'Sara', 'Savic', 'sara', 'sara123', 'sara@biciklrent.com'),
+                (6, 'Milos', 'Milosevic', 'milos', 'milos123', 'milos@biciklrent.com'),
+                (7, 'Katarina', 'Kostic', 'katarina', 'katarina123', 'katarina@biciklrent.com'),
+                (8, 'Nikola', 'Nesic', 'nikolaz', 'nikola123z', 'nikolaz@biciklrent.com'),
+                (9, 'Ognjen', 'Ognjanovic', 'ognjen', 'ognjen123', 'ognjen@biciklrent.com'),
+                (10, 'Test', 'Zaposleni', 'zaposleni', 'zaposleni123', 'zaposleni@biciklrent.com');
+
+            INSERT IGNORE INTO iznajmljivanje (id, datum_pocetka, datum_kraja, cena, napomena, bicikl_id, klijent_id, zaposleni_id) VALUES
+                (1, '2026-07-01', '2026-07-04', 45.00, 'Vikend iznajmljivanje', 1, 1, 1),
+                (2, '2026-06-20', '2026-06-25', 60.00, 'Iznajmljivanje za izlet', 2, 2, 2),
+                (3, '2026-07-02', '2026-07-05', 30.00, 'Poslovno putovanje', 3, 3, 1),
+                (4, '2026-07-10', '2026-07-12', 40.00, 'Rodjendanska proslava', 4, 4, 3),
+                (5, '2026-05-01', '2026-05-03', 25.00, 'Kratak izlet', 5, 5, 4),
+                (6, '2026-07-15', '2026-07-20', 80.00, 'Grupna voznja', 7, 6, 5),
+                (7, '2026-06-01', '2026-06-05', 35.00, 'Porodicno putovanje', 8, 7, 6),
+                (8, '2026-07-03', '2026-07-06', 50.00, 'Iznajmljivanje za konferenciju', 9, 8, 7),
+                (9, '2026-08-01', '2026-08-05', 55.00, 'Letnji festival', 1, 9, 8),
+                (10, '2026-07-02', '2026-07-03', 20.00, 'Jednodnevna voznja', 5, 10, 9);
+        </sql>
+    </changeSet>
+</databaseChangeLog>

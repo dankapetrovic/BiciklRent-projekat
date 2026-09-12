@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-5.0.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+
+    <!-- 1. Dodaj nove kolone direktno u bicikl tabelu -->
+    <changeSet id="006-1-add-specifikacija-columns-to-bicikl" author="Danka">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="bicikl" columnName="tip_bicikle"/>
+            </not>
+        </preConditions>
+        <addColumn tableName="bicikl">
+            <column name="kategorija_id" type="BIGINT"/>
+            <column name="tip_bicikle" type="VARCHAR(255)"/>
+            <column name="velicina_rama" type="VARCHAR(255)"/>
+            <column name="broj_brzina" type="VARCHAR(255)"/>
+            <column name="tip_kocnica" type="VARCHAR(255)"/>
+            <column name="precnik_tocka" type="VARCHAR(255)"/>
+            <column name="tezina" type="VARCHAR(255)"/>
+            <column name="opis" type="VARCHAR(1000)"/>
+        </addColumn>
+    </changeSet>
+
+    <!-- 2. Prebaci postojece podatke iz specifikcija u bicikl -->
+    <changeSet id="006-2-migrate-specifikacija-data" author="Danka">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="specifikcija"/>
+        </preConditions>
+        <sql splitStatements="true" stripComments="true">
+            UPDATE bicikl b
+                JOIN specifikcija s ON s.bicikl_id = b.id
+                SET b.kategorija_id = s.kategorija_id,
+                    b.tip_bicikle = s.tip_bicikle,
+                    b.velicina_rama = s.velicina_rama,
+                    b.broj_brzina = s.broj_brzina,
+                    b.tip_kocnica = s.tip_kocnica,
+                    b.precnik_tocka = s.precnik_tocka,
+                    b.tezina = s.tezina,
+                    b.opis = s.opis;
+        </sql>
+    </changeSet>
+
+    <!-- 3. Dodaj FK bicikl -> kategorija -->
+    <changeSet id="006-3-fk-bicikl-kategorija" author="Danka">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <foreignKeyConstraintExists foreignKeyName="FK_BICIKL_ON_KATEGORIJA"/>
+            </not>
+        </preConditions>
+        <addForeignKeyConstraint baseColumnNames="kategorija_id" baseTableName="bicikl"
+                                 constraintName="FK_BICIKL_ON_KATEGORIJA" referencedColumnNames="id"
+                                 referencedTableName="kategorija"/>
+    </changeSet>
+
+    <!-- 4. Ukloni staru specifikcija tabelu (DROP TABLE sam ukloni izlazne FK-ove) -->
+    <changeSet id="006-5-drop-specifikacija-table" author="Danka">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="specifikcija"/>
+        </preConditions>
+        <dropTable tableName="specifikcija"/>
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-5.0.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+
+    <changeSet id="007-1-update-tip-bicikle-subtypes" author="Danka">
+        <preConditions onFail="MARK_RAN">
+            <columnExists tableName="bicikl" columnName="tip_bicikle"/>
+        </preConditions>
+        <sql splitStatements="true" stripComments="true">
+            UPDATE bicikl SET tip_bicikle = 'Hardtail' WHERE id = 1;
+            UPDATE bicikl SET tip_bicikle = 'Aero' WHERE id = 2;
+            UPDATE bicikl SET tip_bicikle = 'Cruiser' WHERE id = 3;
+            UPDATE bicikl SET tip_bicikle = 'Adventure' WHERE id = 4;
+            UPDATE bicikl SET tip_bicikle = 'E-Cruiser' WHERE id = 5;
+            UPDATE bicikl SET tip_bicikle = 'Fixie' WHERE id = 6;
+            UPDATE bicikl SET tip_bicikle = 'Endurance' WHERE id = 7;
+            UPDATE bicikl SET tip_bicikle = 'Full-suspension' WHERE id = 8;
+            UPDATE bicikl SET tip_bicikle = 'Race gravel' WHERE id = 9;
+            UPDATE bicikl SET tip_bicikle = 'BMX' WHERE id = 10;
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>
